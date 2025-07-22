@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Book List</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>📚 Book List</h1>
+    <a href="/books/add" class="add-button">➕ Add Book</a>
+
+    <div class="book-grid">
+      <% data.forEach(book => { %>
+        <div class="book-card">
+          <h3><%= book.name %></h3>
+          <p><strong>Author:</strong> <%= book.author %></p>
+          <p><strong>Publisher:</strong> <%= book.publisher %></p>
+          <p><strong>Published:</strong> 
+            <%= new Date(book.date_publish).toLocaleDateString('en-US', {
+              day: '2-digit',
+              month: 'short',
+              year: 'numeric'
+            }) %>
+          </p>
+          <div class="actions">
+            <a href="/books/edit/<%= book.id %>">✏️ Edit</a>
+            <a href="/books/delete/<%= book.id %>" onclick="return confirm('Delete this book?')">🗑️ Delete</a>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</body>
+</html>
